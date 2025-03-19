@@ -1,0 +1,12 @@
+# Sử dụng image PHP với Apache
+FROM php:8.2-apache
+
+# Cài đặt các extension PHP cần thiết (nếu có)
+# Ví dụ: cài đặt extension mysqli
+RUN docker-php-ext-install mysqli
+
+# Mở cổng 80 để Apache có thể phục vụ ứng dụng
+EXPOSE 80
+
+# Cấu hình Apache để phục vụ ứng dụng PHP
+# Mặc định Apache sẽ tìm kiếm các tệp trong thư mục /var/www/html

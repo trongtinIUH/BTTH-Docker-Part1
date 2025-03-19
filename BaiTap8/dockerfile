@@ -1,0 +1,12 @@
+# Sử dụng image chính thức của PostgreSQL
+FROM postgres:15
+
+# Sao chép file SQL vào thư mục /docker-entrypoint-initdb.d
+# PostgreSQL tự động chạy tất cả các tệp .sql trong thư mục này khi container khởi động lần đầu
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Thiết lập biến môi trường (nếu cần)
+# ENV POSTGRES_PASSWORD=mysecretpassword
+
+# Mở cổng mặc định của PostgreSQL (5432)
+EXPOSE 5432

@@ -1,0 +1,2 @@
+# Ví dụ nếu bạn sử dụng thư viện nào đó
+flask==2.0.1

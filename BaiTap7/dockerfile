@@ -1,0 +1,20 @@
+# Sử dụng python:3.9 làm base image
+FROM python:3.9
+
+# Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# Sao chép requirements.txt vào container nếu có (có thể bỏ qua nếu không dùng)
+COPY requirements.txt /app/
+
+# Cài đặt các thư viện cần thiết (nếu có)
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Sao chép mã nguồn Python vào container
+COPY . /app/
+
+# Thiết lập biến môi trường APP_ENV
+ENV APP_ENV=development
+
+# Chạy ứng dụng Python
+CMD ["python", "app.py"]

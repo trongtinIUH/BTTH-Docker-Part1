@@ -1,0 +1,11 @@
+# Sử dụng image chính thức của Redis
+FROM redis:latest
+
+# Sao chép tệp redis.conf vào thư mục cấu hình của Redis
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# Mở cổng mặc định của Redis (6379)
+EXPOSE 6379
+
+# Chạy Redis với cấu hình tùy chỉnh
+CMD ["redis-server", "/usr/local/etc/redis/redis.conf"]

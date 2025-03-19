@@ -1,0 +1,32 @@
+# Stage 1: Build the application
+FROM node:18 AS build-stage
+
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Sao chép package.json và package-lock.json vào container
+COPY package.json package-lock.json /app/
+
+# Cài đặt các dependencies
+RUN npm install
+
+# Sao chép toàn bộ mã nguồn vào container
+COPY . /app/
+
+# Stage 2: Run the application
+FROM node:18-alpine AS production-stage
+
+# Thiết lập thư mục làm việc
+WORKDIR /app
+
+# Sao chép ứng dụng đã cài đặt từ build-stage
+COPY --from=build-stage /app /app
+
+# Cài đặt chỉ những dependencies cần thiết cho production
+RUN npm install --production
+
+# Mở cổng ứng dụng
+EXPOSE 3000
+
+# Chạy ứng dụng
+CMD ["node", "app.js"]
